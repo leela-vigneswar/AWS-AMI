@@ -31,7 +31,7 @@ resource "terraform_data" "ami-create-apply" {
     inline = [
       "sudo yum install git -y",
       "cd /tmp && rm -rf aws-image-devops-session && git clone https://github.com/leela-vigneswar/AWS-AMI.git",
-      "cd aws-image-devops-session/rhel-9",
+      "cd AWS-AMI/rhel-9",
       "sudo bash ami-setup.sh",
       "cd /tmp && rm -rf /tmp/aws-image-devops-session",
       #"sudo bash aws.sh",
