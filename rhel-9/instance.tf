@@ -30,11 +30,11 @@ resource "terraform_data" "ami-create-apply" {
 
     inline = [
       "sudo yum install git -y",
-      "cd /tmp && rm -rf aws-image-devops-session && git clone https://github.com/learndevopsonline/aws-image-devops-session.git",
+      "cd /tmp && rm -rf aws-image-devops-session && git clone https://github.com/leela-vigneswar/AWS-AMI.git",
       "cd aws-image-devops-session/rhel-9",
       "sudo bash ami-setup.sh",
       "cd /tmp && rm -rf /tmp/aws-image-devops-session",
-      "sudo bash aws.sh",
+      #"sudo bash aws.sh",
     ]
   }
 }
@@ -48,11 +48,17 @@ resource "aws_ami_from_instance" "ami" {
   }
 }
 
-resource "terraform_data" "public-ami" { 
+resource "terraform_data" "public-ami-access" { 
     provisioner "local-exec" {
-    command =<<EOF
-aws ec2 modify-image-attribute --image-id ${aws_ami_from_instance.ami.id} --launch-permission "Add=[{Group=all}]" --region us-east-1
-EOF
+    command = "aws ec2 disable-image-block-public-access --region us-east-1"  
   }
 }
 
+resource "terraform_data" "public-ami" { 
+    provisioner "local-exec" { 
+    command = "aws ec2 modify-image-attribute --image-id ${aws_ami_from_instance.ami.id} --launch-permission Add=[{Group=all}] --region us-east-1"  
+#     command =<<EOF
+# "aws ec2 modify-image-attribute --image-id ${aws_ami_from_instance.ami.id} --launch-permission Add=[{Group=all}] --region us-east-1"
+#EOF
+  }
+}
