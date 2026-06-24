@@ -22,8 +22,8 @@ resource "aws_security_group" "ami_sg" {
 resource "aws_instance" "ami-instance" {
   ami                         = var.ami_id
   instance_type               = "t3.micro"
-  vpc_security_group_ids      = aws_security_group.ami_sg.id
-  #key_name                    = "DevOps321"
+  vpc_security_group_ids      = [aws_security_group.ami_sg.id]
+  key_name                    = "devops"
 
   tags = {
     Name = "rhel-10-ami"
@@ -35,8 +35,9 @@ resource "terraform_data" "ami-create-apply" {
     connection {
       type     = "ssh"
       user     = "ec2-user"
-      password = "DevOps321"
+      #password = "DevOps321"
       host     = aws_instance.ami-instance.public_ip
+      private_key = file("C:/Users/vigne/Downloads/devops.pem")
     }
 
     inline = [
