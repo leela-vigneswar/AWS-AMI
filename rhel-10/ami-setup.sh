@@ -39,10 +39,10 @@ sed -i -e '/TCPKeepAlive/ c TCPKeepAlive no' -e '/ClientAliveInterval/ c ClientA
 
 
 ## Profile Environment
-cp /tmp/AWS-AMI/rhel-9/scripts/ps1.sh /etc/profile.d/ps1.sh
-cp /tmp/AWS-AMI/rhel-9/scripts/aliases.sh /etc/profile.d/aliases.sh
-cp /tmp/AWS-AMI/rhel-9/scripts/boot-env.sh /etc/profile.d/boot-env.sh
-cp /tmp/AWS-AMI/rhel-9/scripts/profile /etc/profile
+cp /tmp/AWS-AMI/rhel-10/scripts/ps1.sh /etc/profile.d/ps1.sh
+cp /tmp/AWS-AMI/rhel-10/scripts/aliases.sh /etc/profile.d/aliases.sh
+cp /tmp/AWS-AMI/rhel-10/scripts/boot-env.sh /etc/profile.d/boot-env.sh
+cp /tmp/AWS-AMI/rhel-10/scripts/profile /etc/profile
 chmod +x /etc/profile /etc/profile.d/*
 
 useradd ec2-user
@@ -69,7 +69,7 @@ chmod +x /etc/rc.d/rc.local
 echo
 echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIfSCB5MtXe54V3lWGBGSxMWPue5CjmSA4ky7E8GUoeZdXxI+df7msJL93PzmtwU3v+O+NLNJJRfmaGpEkgidVXoi6mnYUVCHb1y4zd6QIFEyglGDlvZ4svhHt7T15B13bJC3mTaR2A/xqlvE0/a4XKN1ATYyn6K6CTFJT8I4TIDQmO3PbcNsNFXoO1ef657aqNf0AXC1QWum3HulIt6iJ4s0pQI4hDTmR5EskJxr2K62F4JDOYmVu8bGhFT6ohYbXBCGQtmdp716RnF0Cp1htmxM001wvCSjWLPZuuBjtHXX+op+MJGr0aIqqxdVZ2gw0JeIDfVo7pkSIdTu+p2Yn devops' >/root/.ssh/authorized_keys
 echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFoOQSSWSX4iJ1F42FODfS7Ct7wxnzRMuKAoTK67Zd5JkjETvroEOcwJHKeRVbjLT8hZuWMz3JdowR25+7W5N23GaBvBq7HbQwec2UGGA6AFAMmijpY1KDZznfBsqVvMY5yT/4XB1RU78dffRuNUs/IeMYnxoh6UO62Zg33JLtJY6waIFNtCFPTN8m4JrsPlt4s6X8E15Jn9Qh9TDNw+R7piDZ/KRDE+paMkflMpptfcNIbK8kzC9/p3DiAMBjmfrReGueI9vrSN66L/BepPTRoUvv9iavKbmu8DEITETlhGnn79V0r0ekXDE6WgZtnTBbbjSFsilNmLw7xjGMS0Bx root@ip-172-31-15-115.ec2.internal' >>/root/.ssh/authorized_keys
-cp /tmp/AWS-AMI/rhel-9/scripts/id_rsa /root/.ssh/id_rsa
+cp /tmp/AWS-AMI/rhel-10/scripts/id_rsa /root/.ssh/id_rsa
 chmod 600 /root/.ssh/id_rsa
 
 echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIfSCB5MtXe54V3lWGBGSxMWPue5CjmSA4ky7E8GUoeZdXxI+df7msJL93PzmtwU3v+O+NLNJJRfmaGpEkgidVXoi6mnYUVCHb1y4zd6QIFEyglGDlvZ4svhHt7T15B13bJC3mTaR2A/xqlvE0/a4XKN1ATYyn6K6CTFJT8I4TIDQmO3PbcNsNFXoO1ef657aqNf0AXC1QWum3HulIt6iJ4s0pQI4hDTmR5EskJxr2K62F4JDOYmVu8bGhFT6ohYbXBCGQtmdp716RnF0Cp1htmxM001wvCSjWLPZuuBjtHXX+op+MJGr0aIqqxdVZ2gw0JeIDfVo7pkSIdTu+p2Yn devops' >/home/ec2-user/.ssh/authorized_keys
@@ -81,8 +81,8 @@ sed -i -e '4 i colorscheme desert' /etc/vimrc
 echo 'ec2-user ALL=(ALL) NOPASSWD:ALL' >/etc/sudoers.d/ec2-user
 chattr +i /etc/ssh/sshd_config /etc/ssh/sshd_config.d/50-cloud-init.conf /etc/sudoers.d/ec2-user
 
-cp /tmp/AWS-AMI/rhel-9/scripts/04-ssh-config.conf /etc/ssh/ssh_config.d/04-ssh-config.conf
-cp /tmp/AWS-AMI/rhel-9/scripts/motd /etc/motd
+cp /tmp/AWS-AMI/rhel-10/scripts/04-ssh-config.conf /etc/ssh/ssh_config.d/04-ssh-config.conf
+cp /tmp/AWS-AMI/rhel-10/scripts/motd /etc/motd
 
 ## Create directory for journalctl failure
 mkdir -p /var/log/journal
@@ -102,8 +102,8 @@ echo ':programname, isequal, "systemd-sysv-generator" /var/log/sysv.log
 & stop' >/etc/rsyslog.d/01-sysv.conf
 
 # Commands to /bin
-cp /tmp/AWS-AMI/rhel-9/scripts/set-hostname /bin/set-prompt
-cp /tmp/AWS-AMI/rhel-9/scripts/mysql_secure_installation /usr/sbin/mysql_secure_installation
+cp /tmp/AWS-AMI/rhel-10/scripts/set-hostname /bin/set-prompt
+cp /tmp/AWS-AMI/rhel-10/scripts/mysql_secure_installation /usr/sbin/mysql_secure_installation
 chmod +x /bin/set-prompt /usr/sbin/mysql_secure_installation
 
 # Install AWS CLI
