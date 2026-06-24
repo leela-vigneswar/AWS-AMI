@@ -1,8 +1,28 @@
+resource "aws_security_group" "ami_sg" {
+  name        = "var.sg_ami"
+  description = "Allow TLS inbound traffic for ${var.sg_ami}"
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  
+}
+
 
 resource "aws_instance" "ami-instance" {
   ami                         = var.ami_id
   instance_type               = "t3.micro"
-  vpc_security_group_ids      = ["sg-0a5363a31d93307b0"]
+  vpc_security_group_ids      = aws_security_group.ami_sg.id
   #key_name                    = "DevOps321"
 
   tags = {

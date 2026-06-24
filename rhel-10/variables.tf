@@ -4,6 +4,11 @@ variable "ami_id" {
 }
 
 variable "ami_name" {
-    default = "RHEL-10-DevOps-Practice"
+    default = "RHEL-10-DevOps-Practice-trail"
+  
+}
+
+variable "sg_ami" {
+    default = "sg_ami"
   
 }
